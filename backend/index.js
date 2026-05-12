@@ -9,7 +9,7 @@ const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
 
 app.get("/", (req, res) => {
-    res.send("Constructix backend funcionando 🚀");
+    res.send("Constructix backend funcionando");
 });
 
 app.listen(3000, () => {

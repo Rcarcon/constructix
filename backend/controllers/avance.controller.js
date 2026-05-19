@@ -16,9 +16,12 @@ const crearAvance = async (req, res) => {
       mensaje: "Avance creado correctamente",
       avance
     });
-  } catch (error) {
-    res.status(500).json({ mensaje: "Error al crear avance", error: error.message });
-  }
+} catch (error) {
+  console.log("BODY RECIBIDO:", req.body);
+  console.log("ERROR:", error.message);
+  console.log("DETALLE:", error.detail);
+  res.status(500).json({ mensaje: "Error al crear avance", error: error.message });
+}
 };
 
 const actualizarAvance = async (req, res) => {

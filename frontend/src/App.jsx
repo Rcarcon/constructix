@@ -75,10 +75,11 @@ const [nuevaCompra, setNuevaCompra] = useState({
 
 const [nuevoMaterial, setNuevoMaterial] = useState({
   nombre: "",
-  categoria: "",
-  unidad: "",
+  descripcion: "",
+  unidad_medida: "",
   precio_unitario: "",
-  stock: ""
+  stock: "",
+  proveedor: ""
 });
 
 const [materialEditando, setMaterialEditando] = useState(null);
@@ -90,7 +91,7 @@ useEffect(() => {
   obtenerProyectos();
   obtenerMateriales();
   obtenerCompras();
-  //obtenerAvances();
+  obtenerAvances();
 
 }, []);
 
@@ -359,14 +360,14 @@ const crearMaterial = async (e) => {
         nuevoMaterial
       );
     }
-
-    setNuevoMaterial({
-      nombre: "",
-      categoria: "",
-      unidad: "",
-      precio_unitario: "",
-      stock: ""
-    });
+setNuevoMaterial({
+  nombre: "",
+  descripcion: "",
+  unidad_medida: "",
+  precio_unitario: "",
+  stock: "",
+  proveedor: ""
+});
 
     obtenerMateriales();
 
@@ -408,13 +409,14 @@ const eliminarMaterial = async (id) => {
 const editarMaterial = (material) => {
   setMaterialEditando(material);
 
-  setNuevoMaterial({
-    nombre: material.nombre,
-    categoria: material.categoria,
-    unidad: material.unidad,
-    precio_unitario: material.precio_unitario,
-    stock: material.stock
-  });
+setNuevoMaterial({
+  nombre: material.nombre,
+  descripcion: material.descripcion,
+  unidad_medida: material.unidad_medida,
+  precio_unitario: material.precio_unitario,
+  stock: material.stock,
+  proveedor: material.proveedor
+});
 };
 
 const avancePromedio =
@@ -1015,17 +1017,20 @@ if (!logueado) {
     <input style={inputStyle} type="text" placeholder="Nombre" value={nuevoMaterial.nombre}
       onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, nombre: e.target.value })} />
 
-    <input style={inputStyle} type="text" placeholder="Categoría" value={nuevoMaterial.categoria}
-      onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, categoria: e.target.value })} />
+    <input style={inputStyle} type="text" placeholder="Descripción" value={nuevoMaterial.descripcion}
+      onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, descripcion: e.target.value })}/>
 
-    <input style={inputStyle} type="text" placeholder="Unidad" value={nuevoMaterial.unidad}
-      onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, unidad: e.target.value })} />
+    <input style={inputStyle} type="text" placeholder="Unidad de medida" value={nuevoMaterial.unidad_medida}
+      onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, unidad_medida: e.target.value })}/>
 
     <input style={inputStyle} type="number" placeholder="Precio unitario" value={nuevoMaterial.precio_unitario}
       onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, precio_unitario: e.target.value })} />
 
     <input style={inputStyle} type="number" placeholder="Stock" value={nuevoMaterial.stock}
       onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, stock: e.target.value })} />
+
+    <input style={inputStyle} type="text" placeholder="Proveedor" value={nuevoMaterial.proveedor}
+      onChange={(e) => setNuevoMaterial({ ...nuevoMaterial, proveedor: e.target.value })}/>
 
     <button
       type="submit"
@@ -1052,12 +1057,13 @@ if (!logueado) {
     }}>
       <thead>
         <tr style={{ borderBottom: "1px solid #475569" }}>
-          <th style={thStyle}>Nombre</th>
-          <th style={thStyle}>Categoría</th>
-          <th style={thStyle}>Unidad</th>
-          <th style={thStyle}>Precio</th>
-          <th style={thStyle}>Stock</th>
-          <th style={thStyle}>Acciones</th>
+<th style={thStyle}>Nombre</th>
+<th style={thStyle}>Descripción</th>
+<th style={thStyle}>Unidad</th>
+<th style={thStyle}>Precio</th>
+<th style={thStyle}>Stock</th>
+<th style={thStyle}>Proveedor</th>
+<th style={thStyle}>Acciones</th>
         </tr>
       </thead>
 
@@ -1065,10 +1071,11 @@ if (!logueado) {
         {materiales.map((material) => (
     <tr key={material.id} style={{ borderBottom: "1px solid #334155" }}>
   <td style={tdStyle}>{material.nombre}</td>
-  <td style={tdStyle}>{material.categoria}</td>
-  <td style={tdStyle}>{material.unidad}</td>
+  <td style={tdStyle}>{material.descripcion}</td>
+  <td style={tdStyle}>{material.unidad_medida}</td>
   <td style={tdStyle}>Q{material.precio_unitario}</td>
   <td style={tdStyle}>{material.stock}</td>
+  <td style={tdStyle}>{material.proveedor}</td>
 
   <td style={tdStyle}>
     <button
@@ -1392,5 +1399,6 @@ if (!logueado) {
      </div>
 );
 }
+
 
 export default App;
